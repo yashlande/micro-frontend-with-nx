@@ -1,0 +1,80 @@
+{
+  "root": "apps/mf-main",
+  "sourceRoot": "apps/mf-main/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/mf-main",
+        "index": "apps/mf-main/src/index.html",
+        "baseHref": "/",
+        "main": "apps/mf-main/src/index.ts",
+        "polyfills": "apps/mf-main/src/polyfills.ts",
+        "tsConfig": "apps/mf-main/tsconfig.app.json",
+        "assets": ["apps/mf-main/src/favicon.ico", "apps/mf-main/src/assets"],
+        "styles": ["apps/mf-main/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/mf-main/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/mf-main/src/environments/environment.ts",
+              "with": "apps/mf-main/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "mf-main:build",
+        "hmr": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "mf-main:build:development"
+        },
+        "production": {
+          "buildTarget": "mf-main:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/mf-main/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/mf-main"],
+      "options": {
+        "jestConfig": "apps/mf-main/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

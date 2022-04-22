@@ -1,4 +1,9 @@
 {
   "version": 2,
-  "projects": {}
+  "projects": {
+    "mf-main": "apps/mf-main",
+    "mf-main-e2e": "apps/mf-main-e2e",
+    "remote": "apps/remote",
+    "remote-e2e": "apps/remote-e2e"
+  }
 }
